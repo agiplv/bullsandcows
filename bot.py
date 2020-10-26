@@ -102,7 +102,7 @@ def echo_all(message):
     keyboard.row(
         telebot.types.InlineKeyboardButton('New Game', callback_data='restart')
     )
-    print(message)
+    logger.info(message.chat)
     if game.get_win(message.chat.id):
         won = bot.send_message(message.chat.id,"Game is not active.", reply_markup=keyboard)
         sleep(5)
