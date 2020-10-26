@@ -53,6 +53,8 @@ def test_game():
     assert ("🐂🐂🐄🐄\n2 Bulls and 2 Cows", True) == game.guess("1243", chat_id)
     assert 1 == game.get_attempts(chat_id)
     assert ("WIN!!!", True) == game.guess("1234", chat_id)
+    win_message = "<b>You won with answer 1234!!!🏆</b>\nNumber of attempts: 2.\n⭐⭐⭐⭐⭐⭐⭐⭐⭐"
+    assert win_message == game.get_win_message(chat_id)
     assert game.get_win(chat_id)
 
     game.restart_game(chat_id)

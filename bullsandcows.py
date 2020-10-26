@@ -214,6 +214,13 @@ COW: This is a number that is present in both numbers but occupies different pos
 
         return "".join(text)
 
+    def get_win_message(self, chat_id):
+        attempts = self.get_attempts(chat_id)
+        answer = self.get_secret(chat_id)
+        star = "⭐"
+        stars = star * (11 - attempts)
+        return "<b>You won with answer %s!!!🏆</b>\nNumber of attempts: %s.\n%s" % (answer, attempts, stars)
+
     def guess(self, guess: str, chat_id: str) -> (str, bool):
         """Game processing guessed number
         Args:

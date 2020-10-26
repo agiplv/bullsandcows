@@ -116,14 +116,10 @@ def echo_all(message):
             keyboard.row(
                 telebot.types.InlineKeyboardButton('New Game', callback_data='restart')
             )
-            attempts = game.get_attempts(message.chat.id)
-            answer = game.get_secret(message.chat.id)
-            star = "⭐"
-            stars = star*(11-attempts)
             bot.send_message(message.chat.id,"⭐🏆⭐")
             bot.send_message(
                 message.chat.id,
-                "<b>You won with answer %s!!!🏆</b>\nNumber of attempts: %s.\n%s" % (answer, attempts, stars),
+                game.get_win_message(message.chat.id),
                 reply_markup=keyboard,
                 parse_mode='HTML')
         else:
