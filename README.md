@@ -29,7 +29,9 @@ For example, in numbers 1325 and 9823, the number two is a bull.
 ``/path/to/new/virtual/environment/bin/activate``
 3. Install Python required modules: 
 ``pip3 install -r requirements.txt``
-4. Start bot
+4. Set Bot TOKEN
+``export BC_TT_TOKEN=<YOUR_BOT_TOKEN``
+5. Start bot
 ``python3 bot.py``
 
 ## Bot in Telegram Chat
