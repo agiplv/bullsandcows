@@ -32,6 +32,6 @@ For example, in numbers 1325 and 9823, the number two is a bull.
 4. Start bot
 ``python3 bot.py``
 
-##Bot in Telegram Chat
+## Bot in Telegram Chat
 
 ![Bot Chat](https://github.com/agiplv/bullsandcows/blob/master/bot.PNG?raw=true)
