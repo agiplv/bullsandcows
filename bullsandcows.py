@@ -178,7 +178,7 @@ COW: This is a number that is present in both numbers but occupies different pos
         """Gets count of Bull and Cows
         Args:
             guess(str): Guessed number
-            secret(str): Choosed number
+            secret(str): Secret number
 
         Returns:
             int,int: Bulls and Cows
@@ -195,7 +195,7 @@ COW: This is a number that is present in both numbers but occupies different pos
         """Sets Bull and Cows message
         Args:
             bulls(int): number of bulls
-            cows(int): number of bulls
+            cows(int): number of cows
 
         Returns:
             str: "%s Bull and %Cows"
@@ -236,5 +236,5 @@ COW: This is a number that is present in both numbers but occupies different pos
 
             return message, validate
         else:
-            message = "Problem, try again. You need to enter %i unique digits from 1 to 9" % self.size
+            message = "Problem, try again. You need to enter %i unique digits from 0 to 9" % self.size
             return message, validate

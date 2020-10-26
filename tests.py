@@ -47,7 +47,7 @@ def test_game():
     assert "1234" == secret
     assert not game.get_win(chat_id)
     assert 0 == game.get_attempts(chat_id)
-    problem = "Problem, try again. You need to enter %i unique digits from 1 to 9" % game.size
+    problem = "Problem, try again. You need to enter %i unique digits from 0 to 9" % game.size
 
     assert (problem, False) == game.guess("test", chat_id)
     assert ("🐂🐂🐄🐄\n2 Bulls and 2 Cows", True) == game.guess("1243", chat_id)
