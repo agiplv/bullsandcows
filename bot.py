@@ -3,10 +3,17 @@ import logging
 import sys
 from time import sleep
 
+import os
 import telebot
 from bullsandcows import BullAndCows
 
-bot = telebot.TeleBot("1368410071:AAF1D1RSihShCKLOnIwm0pnMEwZvHO_qKGM")
+token = os.getenv('BC_TT_TOKEN', False)
+
+if token:
+    bot = telebot.TeleBot(token)
+else:
+    print('Set telegram token to BC_TT_TOKEN environment variable')
+    exit(-1)
 
 logger = telebot.logger
 formatter = logging.Formatter(
