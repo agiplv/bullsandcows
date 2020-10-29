@@ -96,43 +96,52 @@ def send_help(message):
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
-    game.start_game(message.chat.id)
-    guess = message.text.strip()
-    keyboard = telebot.types.InlineKeyboardMarkup()
-    keyboard.row(
-        telebot.types.InlineKeyboardButton('New Game', callback_data='restart')
-    )
-    logger.info(message.chat)
-    if game.get_win(message.chat.id):
-        won = bot.send_message(message.chat.id,"Game is not active.", reply_markup=keyboard)
-        sleep(5)
-        bot.delete_message(message.chat.id, message.message_id)
-        bot.delete_message(won.chat.id,won.message_id)
-    else:
-        reply, validate = game.guess(guess, message.chat.id)
+    try:
+        game.start_game(message.chat.id)
+        guess = message.text.strip()
+        keyboard = telebot.types.InlineKeyboardMarkup()
+        keyboard.row(
+            telebot.types.InlineKeyboardButton("New Game", callback_data='restart')
+        )
 
         if game.get_win(message.chat.id):
-            keyboard = telebot.types.InlineKeyboardMarkup()
-            keyboard.row(
-                telebot.types.InlineKeyboardButton('New Game', callback_data='restart')
-            )
-            bot.send_message(message.chat.id,"⭐🏆⭐")
-            bot.send_message(
-                message.chat.id,
-                game.get_win_message(message.chat.id),
-                reply_markup=keyboard,
-                parse_mode='HTML')
+            won = bot.send_message(message.chat.id, "Game is not active.", reply_markup=keyboard)
+            sleep(5)
+            bot.delete_message(message.chat.id, message.message_id)
+            bot.delete_message(won.chat.id, won.message_id)
         else:
-            if not validate:
-                if reply:
-                    bad = bot.send_message(message.chat.id, reply)
-                    sleep(3)
-                    bot.delete_message(message.chat.id, message.message_id)
-                    bot.delete_message(bad.chat.id,bad.message_id)
+            reply, validate = game.guess(guess, message.chat.id)
+
+            if game.get_win(message.chat.id):
+                keyboard = telebot.types.InlineKeyboardMarkup()
+                keyboard.row(
+                    telebot.types.InlineKeyboardButton("New Game", callback_data='restart')
+                )
+                bot.send_message(message.chat.id, "⭐🏆⭐")
+                bot.send_message(
+                    message.chat.id,
+                    game.get_win_message(message.chat.id),
+                    reply_markup=keyboard,
+                    parse_mode='HTML'
+                )
             else:
-                for reply in reply.split('\n'):
+                if not validate:
                     if reply:
-                        bot.send_message(message.chat.id, reply)
+                        bad = bot.send_message(message.chat.id, reply)
+                        sleep(3)
+                        bot.delete_message(message.chat.id, message.message_id)
+                        bot.delete_message(bad.chat.id, bad.message_id)
+                else:
+                    for reply in reply.split('\n'):
+                        if reply:
+                            bot.send_message(message.chat.id, reply)
+    except:
+        try:
+            e = sys.exc_info()[0]
+            logger.error(e)
+            logger.error(message)
+        except:
+            pass
 
 
 bot.polling()
